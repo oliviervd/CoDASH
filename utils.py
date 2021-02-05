@@ -5,6 +5,8 @@ from datetime import datetime
 from collections import Counter
 import sqlite3
 import pandas as pd
+import plotly.express as px
+import plotly.graph_objs as go
 
 # transform db to list of dicts
 all = []
@@ -36,13 +38,12 @@ dmg_obj = list(
 count_list = [(int(len(stam_obj)), current_time(), "STAM"),
               (int(len(dmg_obj)), current_time(), "Design Museum Gent")]
 
-def df_counter():
-    conn_count = sqlite3.connect("tracker.db")
-    c_count = conn_count.cursor()
-    df_count = pd.read_sql_query("SELECT * FROM totalcount", conn_count)
+conn_count = sqlite3.connect("tracker.db")
+c_count = conn_count.cursor()
+df_count = pd.read_sql_query("SELECT * FROM totalcount", conn_count)
 
+df_count["totalcount"] = df_count["totalcount"].astype(int)
 
-
-
+counter_fig = px.line(df_count, x="date", y="totalcount", color="institution")
 
 

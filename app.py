@@ -29,7 +29,12 @@ app.layout = html.Div(children=[
     html.Div(children='''
         number of objects published by Design Museum Gent: ''' + str(len(dmg_obj))),
     html.Div(children='''
-        last update: ''' + str(datetime.now()))
+        last update: ''' + str(datetime.now())),
+
+    dcc.Graph(
+        id='counter',
+        figure= counter_fig
+    )
 ])
 
 if __name__ == '__main__':
