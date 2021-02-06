@@ -3,6 +3,7 @@ import numpy as np
 import plotly.graph_objects as go
 
 from components.data_prep import *
+from components.utils import count_list
 from plotly.subplots import make_subplots
 
 def data_completeness():
@@ -92,4 +93,10 @@ def data_completeness():
 
     return fig
 
+def upload_sched():
+    cnt = fetch_count_history()
+    fig = px.line(cnt, x=cnt.index, y="totalcount", color="institution")
+    fig.update_xaxes(title_text="date")
+    fig.update_yaxes(title_text="number of objects published")
+    return fig
 

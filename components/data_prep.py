@@ -1,5 +1,6 @@
 from sync import *
 from components.utils import sql_to_dataframe
+import sqlite3
 
 # generate clean dataframe containing objects from LDES
 all = sql_to_dataframe()
@@ -59,5 +60,14 @@ def counter_reg():
     cnt_all["STAM_P"] = (cnt_all["STAM"]/count_list[0][0]) * 100
     cnt_all["DMG_P"] = (cnt_all["DMG"]/count_list[1][0]) * 100
     return cnt_all
+
+def fetch_count_history():
+    connection = sqlite3.connect("data/tracker.db")
+    df_cnt_hist = pd.read_sql_query("SELECT * from totalcount", connection)
+    df_cnt_hist["date"] = pd.to_datetime(df_cnt_hist["date"], yearfirst=True)
+    df_cnt_hist = df_cnt_hist.set_index("date")
+    df_cnt_hist.sort_index(ascending=True, inplace=True)
+    df_cnt_hist["totalcount"] = df_cnt_hist["totalcount"].astype(str).astype(int)
+    return df_cnt_hist
 
 
