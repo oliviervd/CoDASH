@@ -13,5 +13,12 @@
         </library>
       </libraries>
     </data-source>
+    <data-source source="LOCAL" name="eventstream.db" uuid="1b25dbea-8f4f-4b1a-bd7e-ccf1d4856391">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$USER_HOME$/IdeaProjects/adlib2eventstream/eventstream.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
