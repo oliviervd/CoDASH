@@ -14,12 +14,12 @@ def sql_to_dataframe():
     c1.execute("SELECT payload FROM Members")
     db = c1.fetchall()
 
-    all = []
+    df_all = []
     for i in db:
         obj = json.loads(i[0])
-        all.append(obj)
+        df_all.append(obj)
 
-    return all
+    return df_all
 
 
 def current_time():
