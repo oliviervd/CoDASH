@@ -9,7 +9,7 @@ import plotly.graph_objs as go
 
 
 def sql_to_dataframe():
-    conn_1 = sqlite3.connect("/Users/huynslol/IdeaProjects/adlib2eventstream/eventstream.db")
+    conn_1 = sqlite3.connect("data/eventstream.db")
     c1 = conn_1.cursor()
     c1.execute("SELECT payload FROM Members")
     db = c1.fetchall()
@@ -19,7 +19,7 @@ def sql_to_dataframe():
         obj = json.loads(i[0])
         df_all.append(obj)
 
-    return df_all
+    df_obj_all = pd.DataFrame(df_all)
 
 
 def current_time():
