@@ -1,4 +1,4 @@
-from sync import *
+from components.sync import *
 from components.utils import sql_to_dataframe
 import sqlite3
 
