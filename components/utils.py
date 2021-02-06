@@ -41,15 +41,15 @@ dmg_obj = list(
 count_list = [(int(len(stam_obj)), current_time(), "STAM"),
             (int(len(dmg_obj)), current_time(), "Design Museum Gent")]
 
-def update_sqlcount():
-    conn_2 = sqlite3.connect("data/tracker.db")
-    c2 = conn_2.cursor()
-    for i in count_list:
-        format_str = """INSERT INTO totalcount (totalcount, date, institution) VALUES ("{count}","{date}","{inst}")"""
-        sql_command = format_str.format(count=i[0], date=i[1], inst=i[2])
-        c2.execute(sql_command)
-    conn_2.commit()
-    conn_2.close()
+# def update_sqlcount():
+#     conn_2 = sqlite3.connect("/Users/huynslol/Documents/CoDASH/data/tracker.db")
+#     c2 = conn_2.cursor()
+#     for i in count_list:
+#         format_str = """INSERT INTO totalcount (totalcount, date, institution) VALUES ("{count}","{date}","{inst}")"""
+#         sql_command = format_str.format(count=i[0], date=i[1], inst=i[2])
+#         c2.execute(sql_command)
+#     conn_2.commit()
+#     conn_2.close()
 
 
 
