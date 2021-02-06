@@ -19,7 +19,7 @@ def sql_to_dataframe():
         obj = json.loads(i[0])
         df_all.append(obj)
 
-    df_obj_all = pd.DataFrame(df_all)
+    return df_all
 
 
 def current_time():
