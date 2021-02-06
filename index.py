@@ -7,10 +7,12 @@ from app import server
 from apps import app1
 
 app.layout = html.Div([
-    dcc.Location(id='url', refresh=False),
-    html.Div(id='page-content')
+    html.Div([
+        dcc.Link("registration_statistics", href="apps/app1")
+    ], className="row"),
+    dcc.Location(id="url", refresh=False),
+    html.Div(id="page-content", children=[])
 ])
-
 
 @app.callback(Output("page-content", "children"),
               Input("url", "pathname"))
@@ -22,4 +24,4 @@ def display_page(pathname):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
