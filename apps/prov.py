@@ -17,8 +17,9 @@ layout = html.Div([
         ),
         dbc.Col([
             dbc.ButtonGroup(
-                [dbc.Button("PROVENANCE", href="/provenance"),
-                 dbc.Button("HOME", href="/")]
+                [dbc.Button("HOME", href="/"),
+                 dbc.Button("PROVENANCE", href="/provenance")],
+                size="lg"
             )
         ])
     ]),
@@ -28,7 +29,7 @@ layout = html.Div([
                 id="provcount",
                 figure=prov_timeline(),
                 config={'displayModeBar': False}
-            ), width={"size":10, "offset":1}
+            ), width={"size": 10, "offset": 1}
         )
     ]),
     # dbc.Row(
@@ -40,13 +41,22 @@ layout = html.Div([
     #         ), width={"size":10, "offset":1}
     #     )
     # ),
-    dbc.Row(
+
+    dbc.Row([
+        dbc.Col(width={"size": 1}),
         dbc.Col(
             dcc.Graph(
                 id="provmethodtime",
-                figure=prov_method_time(),
+                figure=prov_method_time("Design Museum Gent"),
                 config={'displayModeBar': False}
-            ), width={"size": 10, "offset": 1}
+            ), width={"size": 5}
+        ),
+        dbc.Col(
+            dcc.Graph(
+                id="provmethodtime",
+                figure=prov_method_time("STAM"),
+                config={'displayModeBar': False},
+            ), width={"size": 5}
         )
-    )
+    ])
 ])

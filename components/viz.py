@@ -88,7 +88,7 @@ def data_completeness():
 def upload_sched():
     cnt = fetch_count_history()
     fig = px.line(cnt, x=cnt.index, y="totalcount", color="institution")
-    fig.update_xaxes(title_text="date")
+    fig.update_xaxes(title_text="")
     fig.update_yaxes(title_text="number of objects published in LDES")
     return fig
 
@@ -98,20 +98,56 @@ def prov_timeline():
     fig = px.histogram(prov, "start", color="inst")
     fig.update_xaxes(title_text="date of transfer")
     fig.update_yaxes(title_text="number of objects transferred on given date")
-    fig.update_layout(title="overview of object transfers (acquisitions, gifts, ...) based on time of transfer",
-                      showlegend=False)
+    fig.update_layout(title="overview of object transfers (acquisitions, gifts, ...) based on time of transfer")
+    fig.update_layout(legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="right",
+        x=1
+    ),legend_title_text="", xaxis_title="")
     return fig
 
 
 def prov_method():
     prov = fetch_prov_info()
     fig = px.histogram(prov, y="method", color="inst")
+    fig.update_layout(legend=dict(
+        yanchor="top",
+        y=0.99,
+        xanchor="left",
+        x=0.01
+    ))
     return fig
 
 
-def prov_method_time():
+def prov_method_time(inst):
     prov = fetch_prov_info()
+    prov = prov[prov["inst"] == inst]
+    # prov["start"] = pd.to_datetime(prov["start"], yearfirst=True)
+    # prov["end"] = pd.to_datetime(prov["end"], yearfirst=True)
+    fig = px.histogram(prov, "start", color="method",
+                       title="{}".format(inst))
+    # fig.update_yaxes(title="number of objects transferred on a given date grouped by method")
+    fig.update_layout(legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="right",
+        x=1
+    ),legend_title_text="", xaxis_title="")
+    fig.update_yaxes(visible=True, title="number of objects received")
+    return fig
+
+
+def prov_method_time_all():
+    prov = fetch_prov_info()
+    # prov["start"] = pd.to_datetime(prov["start"], yearfirst=True)
+    # prov["end"] = pd.to_datetime(prov["end"], yearfirst=True)
     fig = px.histogram(prov, "start", color="method", facet_col="inst")
     # fig.update_yaxes(title="number of objects transferred on a given date grouped by method")
-    # fig.update_layout(showlegend=False)
+    fig.update_yaxes(matches=None)
+    fig.update_xaxes(matches=None)
     return fig
+
+
