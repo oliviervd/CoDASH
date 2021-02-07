@@ -94,6 +94,8 @@ def fetch_prov_info():
     df_prov["start"] = prov_ds
     df_prov["end"] = prov_de
     df_prov["inst"] = prov_inst
+    df_prov = df_prov.replace("http://www.wikidata.org/entity/Q980285", "STAM")
+    df_prov = df_prov.replace("http://www.wikidata.org/entity/Q1809071", "Design Museum Gent")
 
     return df_prov
 

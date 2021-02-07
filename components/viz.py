@@ -6,9 +6,8 @@ from components.data_prep import *
 from components.utils import count_list
 from plotly.subplots import make_subplots
 
+
 def data_completeness():
-
-
     cnt_all = counter_reg()
 
     fig = make_subplots(rows=1, cols=2, specs=[[{}, {}]], shared_xaxes=True,
@@ -18,7 +17,7 @@ def data_completeness():
     fig.append_trace(go.Bar(
         x=cnt_all["STAM"],
         y=cnt_all.index,
-        text = cnt_all["STAM_P"],
+        text=cnt_all["STAM_P"],
         marker=dict(
             color='rgba(50, 171, 96, 0.6)',
             line=dict(
@@ -33,7 +32,7 @@ def data_completeness():
     fig.append_trace(go.Bar(
         x=cnt_all["DMG"],
         y=cnt_all.index,
-        text = cnt_all["DMG_P"],
+        text=cnt_all["DMG_P"],
         marker=dict(
             color='rgba(90, 160, 96, 0.6)',
             line=dict(
@@ -81,17 +80,10 @@ def data_completeness():
         plot_bgcolor='rgb(248, 248, 255)',
     )
 
-    # annotations = []
-    #
-    # # adding labels (%)
-    # annotations.append(dict(xref='x1', yref='y1',
-    #                         showarrow=False
-    # ))
-    #
-    # fig.update_layout(annotations=annotations)
     fig.update_traces(texttemplate='%{text:.2s}', textposition='outside')
 
     return fig
+
 
 def upload_sched():
     cnt = fetch_count_history()
@@ -100,3 +92,11 @@ def upload_sched():
     fig.update_yaxes(title_text="number of objects published in LDES")
     return fig
 
+
+def prov_timeline():
+    prov = fetch_prov_info()
+    fig = px.histogram(prov, "start", color="inst")
+    fig.update_xaxes(title_text="date of transfer")
+    fig.update_yaxes(title_text="number of objects transferred on given date")
+    fig.update_layout(title="overview of object transfers (acquisitions, gifts, ...) based on time of transfer")
+    return fig
