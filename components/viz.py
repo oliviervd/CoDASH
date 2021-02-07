@@ -97,6 +97,6 @@ def upload_sched():
     cnt = fetch_count_history()
     fig = px.line(cnt, x=cnt.index, y="totalcount", color="institution")
     fig.update_xaxes(title_text="date")
-    fig.update_yaxes(title_text="number of objects published")
+    fig.update_yaxes(title_text="number of objects published in LDES")
     return fig
 

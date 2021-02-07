@@ -6,7 +6,7 @@ import json
 
 from components.data_prep import *
 from components.utils import *
-from components.utils import sql_to_dataframe
+from components.utils import sql_to_json
 
 x = datetime.today()
 y = x.replace(day=x.day + 1, hour=1, minute=0, second=0, microsecond=0)
@@ -20,14 +20,14 @@ def sync():
     subprocess.run('node /Users/huynslol/IdeaProjects/adlib2eventstream/bin/adlib2backend.js', shell=True)
 
     # copy to db
-    sql_to_dataframe()
+    sql_to_json()
 
     # update counter
     # total_count()
 
     # append new count and timestamp to db
 
-    df_all = sql_to_dataframe()
+    df_all = sql_to_json()
 
     stam_obj = list(
         filter(lambda objet: objet["MaterieelDing.beheerder"] == 'http://www.wikidata.org/entity/Q980285', df_all))
