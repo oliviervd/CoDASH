@@ -98,5 +98,20 @@ def prov_timeline():
     fig = px.histogram(prov, "start", color="inst")
     fig.update_xaxes(title_text="date of transfer")
     fig.update_yaxes(title_text="number of objects transferred on given date")
-    fig.update_layout(title="overview of object transfers (acquisitions, gifts, ...) based on time of transfer")
+    fig.update_layout(title="overview of object transfers (acquisitions, gifts, ...) based on time of transfer",
+                      showlegend=False)
+    return fig
+
+
+def prov_method():
+    prov = fetch_prov_info()
+    fig = px.histogram(prov, y="method", color="inst")
+    return fig
+
+
+def prov_method_time():
+    prov = fetch_prov_info()
+    fig = px.histogram(prov, "start", color="method", facet_col="inst")
+    # fig.update_yaxes(title="number of objects transferred on a given date grouped by method")
+    # fig.update_layout(showlegend=False)
     return fig
