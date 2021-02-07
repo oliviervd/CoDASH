@@ -44,7 +44,7 @@ def data_completeness():
     ), 1, 2)
 
     fig.update_layout(
-        title="overview of data completeness based on CoGhent data model",
+        title="overview of data completeness based on CoGhent data model (%)",
         yaxis=dict(
             showgrid=False,
             showline=False,
