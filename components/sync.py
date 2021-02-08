@@ -17,7 +17,7 @@ secs = delta_t.seconds + 1
 
 def sync():
     # sync with adlib2eventstream > fetch latest objects from LDES
-    subprocess.run('node /Users/huynslol/IdeaProjects/adlib2eventstream/bin/adlib2backend.js', shell=True)
+    # subprocess.run('node /Users/huynslol/IdeaProjects/adlib2eventstream/bin/adlib2backend.js', shell=True)
 
     # copy to db
     sql_to_json()
