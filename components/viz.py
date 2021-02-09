@@ -98,6 +98,7 @@ def prov_timeline():
     fig = px.histogram(prov, "start", color="inst")
     fig.update_xaxes(title_text="date of transfer")
     fig.update_yaxes(title_text="number of objects transferred on given date")
+    fig.update_xaxes(categoryorder="category ascending")
     fig.update_layout(title="overview of object transfers (acquisitions, gifts, ...) based on time of transfer")
     fig.update_layout(legend=dict(
         orientation="h",
@@ -112,6 +113,7 @@ def prov_timeline():
 def prov_method():
     prov = fetch_prov_info()
     fig = px.histogram(prov, y="method", color="inst")
+    fig.update_xaxes(categoryorder="category ascending")
     fig.update_layout(legend=dict(
         yanchor="top",
         y=0.99,
@@ -137,6 +139,7 @@ def prov_method_time(inst):
         x=1
     ),legend_title_text="", xaxis_title="")
     fig.update_yaxes(visible=True, title="number of objects received")
+    fig.update_xaxes(categoryorder="category ascending")
     return fig
 
 

@@ -11,18 +11,28 @@ layout = html.Div([
     ]),
     dbc.Row([
         dbc.Col([
-            html.H1("CoDASH"),
-            html.H2("Provenance")],
+            html.H1("CoDASH")],
             width={"size": 4, "offset": 1}
         ),
         dbc.Col([
             dbc.ButtonGroup(
                 [dbc.Button("HOME", href="/"),
+                 dbc.Button("REGISTRATION", href="/registration"),
                  dbc.Button("PROVENANCE", href="/provenance")],
                 size="lg"
             )
         ])
     ]),
+
+    dbc.Row(
+        dbc.Col(
+            html.P("Objects can be collected in many different ways, the transferal from an object to the museum or "
+                   "archive makes part of its provenance. This dashboard offers a glimps on when and how objects are "
+                   "acquired."),
+            width={"size": 4, "offset": 1}
+        )
+    ),
+
     dbc.Row([
         dbc.Col(
             dcc.Graph(

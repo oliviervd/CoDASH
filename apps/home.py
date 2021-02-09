@@ -17,15 +17,22 @@ layout = html.Div([
         dbc.Col([
             dbc.ButtonGroup(
                 [dbc.Button("HOME",href="/"),
+                 dbc.Button("REGISTRATION", href="/registration"),
                  dbc.Button("PROVENANCE", href="/provenance")],
                 size="lg"
             )
         ])
-    ]),
+    ], justify="end",),
+
     dbc.Row(
         dbc.Col(
-            html.Div('''last update: ''' + str(datetime.now()))
-            , width={"size": 10, "offset": 1}
+            html.P("Collections of Ghent will publish  a minimum of 100.000 cultural heritage "
+                   "objects from a range of five cultural heritage institutions based in Ghent. "
+                   "This data will be made accessible as Linked Open Data via our Linked Data Event Stream (LDES). "
+                   "CoDASH analyzes this data and translates it into human readable graphs, "
+                   "offering insights into the collections at large. This dashboard is structered in different "
+                   "thematic groups that can be accessed via the tabs on top."),
+            width={"size": 4, "offset": 1}
         )
     ),
 
@@ -41,11 +48,8 @@ layout = html.Div([
 
     dbc.Row(
         dbc.Col(
-            dcc.Graph(
-                id="1",
-                figure=data_completeness(),
-                config={'displayModeBar': False}
-            ), width={"size": 10, "offset": 1}
+            html.Div('''last update: ''' + str(datetime.now())),
+            width={"size": 10, "offset": 1}
         )
     ),
 

@@ -4,7 +4,7 @@ from dash.dependencies import Input, Output
 
 from app import app
 from app import server
-from apps import home, prov
+from apps import home, prov, registration
 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
@@ -21,6 +21,8 @@ def display_page(pathname):
         return home.layout
     elif pathname == "/provenance":
         return prov.layout
+    elif pathname == "/registration":
+        return registration.layout
     else:
         return "404 page error!"
 
