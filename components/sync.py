@@ -15,36 +15,34 @@ delta_t = y - x
 secs = delta_t.seconds + 1
 
 
-def sync():
-    # sync with adlib2eventstream > fetch latest objects from LDES
-    # subprocess.run('node /Users/huynslol/IdeaProjects/adlib2eventstream/bin/adlib2backend.js', shell=True)
 
-    # copy to db
-    sql_to_json()
+# sync with adlib2eventstream > fetch latest objects from LDES
+# subprocess.run('node /Users/huynslol/IdeaProjects/adlib2eventstream/bin/adlib2backend.js', shell=True)
 
-    # update counter
-    # total_count()
+# copy to db
+sql_to_json()
 
-    # append new count and timestamp to db
+# update counter
+# total_count()
 
-    df_all = sql_to_json()
+# append new count and timestamp to db
 
-    stam_obj = list(
-        filter(lambda objet: objet["MaterieelDing.beheerder"] == 'http://www.wikidata.org/entity/Q980285', df_all))
-    dmg_obj = list(
-        filter(lambda objet: objet["MaterieelDing.beheerder"] == 'http://www.wikidata.org/entity/Q1809071', df_all))
+df_all = sql_to_json()
 
-    count_list = [(int(len(stam_obj)), current_time(), "STAM"),
-                  (int(len(dmg_obj)), current_time(), "Design Museum Gent")]
+stam_obj = list(
+    filter(lambda objet: objet["MaterieelDing.beheerder"] == 'http://www.wikidata.org/entity/Q980285', df_all))
+dmg_obj = list(
+    filter(lambda objet: objet["MaterieelDing.beheerder"] == 'http://www.wikidata.org/entity/Q1809071', df_all))
 
-    conn_2 = sqlite3.connect("data/tracker.db")
-    c2 = conn_2.cursor()
-    for i in count_list:
-        format_str = """INSERT INTO totalcount (totalcount, date, institution) VALUES ("{count}","{date}","{inst}")"""
-        sql_command = format_str.format(count=i[0], date=i[1], inst=i[2])
-        c2.execute(sql_command)
-    conn_2.commit()
-    conn_2.close()
+count_list = [(int(len(stam_obj)), current_time(), "STAM"),
+              (int(len(dmg_obj)), current_time(), "Design Museum Gent")]
 
-t = Timer(secs, sync)
-t.start()
+conn_2 = sqlite3.connect("data/tracker.db")
+c2 = conn_2.cursor()
+for i in count_list:
+    format_str = """INSERT INTO totalcount (totalcount, date, institution) VALUES ("{count}","{date}","{inst}")"""
+    sql_command = format_str.format(count=i[0], date=i[1], inst=i[2])
+    c2.execute(sql_command)
+conn_2.commit()
+conn_2.close()
+

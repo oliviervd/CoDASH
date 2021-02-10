@@ -80,13 +80,17 @@ def fetch_count_history():
 
 
 def fetch_prov_info():
+    all = sql_to_json()
     prov_id, prov_method, prov_inst, prov_ds, prov_de = [], [], [], [], []
     for i in range(0, len(all)):
-        prov_ds.append(all[i]['MaterieelDing.isOvergedragenBijVerwerving']["Gebeurtenis.tijd"]["Periode.begin"])
-        prov_de.append(all[i]['MaterieelDing.isOvergedragenBijVerwerving']["Gebeurtenis.tijd"]["Periode.einde"])
-        prov_method.append(all[i]['MaterieelDing.isOvergedragenBijVerwerving']["Activiteit.gebruikteTechniek"])
-        prov_id.append(all[i]['Object.identificator']['Identificator.identificator'])
-        prov_inst.append(all[i]['MaterieelDing.beheerder'])
+        try:
+            prov_ds.append(all[i]['MaterieelDing.isOvergedragenBijVerwerving']["Gebeurtenis.tijd"]["Periode.begin"])
+            prov_de.append(all[i]['MaterieelDing.isOvergedragenBijVerwerving']["Gebeurtenis.tijd"]["Periode.einde"])
+            prov_method.append(all[i]['MaterieelDing.isOvergedragenBijVerwerving']["Activiteit.gebruikteTechniek"])
+            prov_id.append(all[i]['Object.identificator']['Identificator.identificator'])
+            prov_inst.append(all[i]['MaterieelDing.beheerder'])
+        except Exception:
+            pass
 
     df_prov = pd.DataFrame()
     df_prov["id"] = prov_id
