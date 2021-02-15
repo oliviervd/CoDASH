@@ -153,4 +153,8 @@ def prov_method_time_all():
     fig.update_xaxes(matches=None)
     return fig
 
+def creators_count():
+    c = fetch_creation_info()
+    fig = px.histogram(c, "creator")
+    return fig
 

@@ -1,9 +1,8 @@
+from components.utils import *
+from components.viz import creators_count
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
-
-from components.utils import *
-from components.viz import data_completeness
 
 layout =  html.Div([
     dbc.Row([
@@ -25,13 +24,12 @@ layout =  html.Div([
             )
         ])
     ]),
-    dbc.Row(
-            dbc.Col(
-                dcc.Graph(
-                    id="1",
-                    figure=data_completeness(),
-                    config={'displayModeBar': False}
-                ), width={"size": 10, "offset": 1}
+    dbc.Row([
+        dbc.Col(
+            dcc.Graph(
+                id="c_count",
+                figure=creators_count()
             )
         )
     ])
+])

@@ -105,9 +105,101 @@ def fetch_prov_info():
 
     return df_prov
 
-def fetch_creation_info():
-    pass
-
 
 def fetch_material_info():
     pass
+
+def fetch_creation_info():
+    all = sql_to_json()
+    creation_ds, creation_id, creation_de, creation_creator, creation_place = [], [], [], [], []
+    for x in range(0, len(all)):  ##len al = 2402
+        #loop 1
+        creation_id.append(all[x]['Object.identificator']['Identificator.identificator'])
+        try:
+            # creator
+            try:
+                creation_creator.append(
+                    all[x]["MaterieelDing.productie"][0]["Activiteit.uitgevoerdDoor"]["volledigeNaam"])
+            except:
+                creation_creator.append("None")
+            # date start
+            try:
+                creation_ds.append(all[x]["MaterieelDing.productie"][0]["Gebeurtenis.tijd"]["Periode.begin"])
+            except:
+                creation_ds.append("None")
+            # date end
+            try:
+                creation_de.append(all[x]["MaterieelDing.productie"][0]["Gebeurtenis.tijd"]["Periode.einde"])
+            except:
+                creation_de.append("None")
+            try:
+                creation_place.append(all[x]["MaterieelDing.productie"][0]["Gebeurtenis.plaats"])
+            except:
+                creation_place.append("None")
+        except Exception:
+            pass
+
+        # loop 2
+        creation_id.append(all[x]['Object.identificator']['Identificator.identificator'])
+        try:
+            # creator
+            try:
+                creation_creator.append(
+                    all[x]["MaterieelDing.productie"][1]["Activiteit.uitgevoerdDoor"]["volledigeNaam"])
+            except:
+                creation_creator.append(float("NaN"))
+            # date start
+            try:
+                creation_ds.append(all[x]["MaterieelDing.productie"][1]["Gebeurtenis.tijd"]["Periode.begin"])
+            except:
+                creation_ds.append(float("NaN"))
+            # date end
+            try:
+                creation_de.append(all[x]["MaterieelDing.productie"][1]["Gebeurtenis.tijd"]["Periode.einde"])
+            except:
+                creation_de.append(float("NaN"))
+            try:
+                creation_place.append(all[x]["MaterieelDing.productie"][1]["Gebeurtenis.plaats"])
+            except:
+                creation_place.append(float("NaN"))
+        except Exception:
+            pass
+
+        # loop 2
+        creation_id.append(all[x]['Object.identificator']['Identificator.identificator'])
+        try:
+            # creator
+            try:
+                creation_creator.append(
+                    all[x]["MaterieelDing.productie"][2]["Activiteit.uitgevoerdDoor"]["volledigeNaam"])
+            except:
+                creation_creator.append(float("NaN"))
+            # date start
+            try:
+                creation_ds.append(all[x]["MaterieelDing.productie"][2]["Gebeurtenis.tijd"]["Periode.begin"])
+            except:
+                creation_ds.append(float("NaN"))
+            # date end
+            try:
+                creation_de.append(all[x]["MaterieelDing.productie"][2]["Gebeurtenis.tijd"]["Periode.einde"])
+            except:
+                creation_de.append(float("NaN"))
+            try:
+                creation_place.append(all[x]["MaterieelDing.productie"][2]["Gebeurtenis.plaats"])
+            except:
+                creation_place.append(float("NaN"))
+        except Exception:
+            pass
+
+        df_creation = pd.DataFrame()
+        df_creation["id"] = creation_id
+        df_creation["creation_ds"] = creation_ds
+        df_creation["creation_de"] = creation_de
+        df_creation["creator"] = creation_creator
+        df_creation["creation_place"] = creation_place
+
+    return df_creation
+
+# df_creation = fetch_creation_info()
+# df_c_group = df_creation.groupby("id")
+# df_c_group = df_c_group.dropna()

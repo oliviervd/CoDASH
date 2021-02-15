@@ -17,6 +17,7 @@ layout = html.Div([
         dbc.Col([
             dbc.ButtonGroup(
                 [dbc.Button("HOME",href="/"),
+                 dbc.Button("CREATION", href="/creation"),
                  dbc.Button("REGISTRATION", href="/registration"),
                  dbc.Button("PROVENANCE", href="/provenance")],
                 size="lg"
